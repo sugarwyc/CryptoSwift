@@ -45,14 +45,16 @@ extension Int {
     }
 }
 
-
+private func _shiftLeft<T: SignedIntegerType where T: Initiable>(value: T, count: Int) -> T {
+    return shiftLeft(value, count: count)
+}
 
 /** Shift bits */
 extension Int {
     
     /** Shift bits to the left. All bits are shifted (including sign bit) */
     private mutating func shiftLeft(count: Int) -> Int {
-        self = CryptoSwift.shiftLeft(self, count: count) //FIXME: count:
+        self = _shiftLeft(self, count: count) //FIXME: count:
         return self
     }
     
