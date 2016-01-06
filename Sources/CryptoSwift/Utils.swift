@@ -43,7 +43,11 @@ func toUInt32Array(slice: ArraySlice<UInt8>) -> Array<UInt32> {
     result.reserveCapacity(16)
     
     for idx in slice.startIndex.stride(to: slice.endIndex, by: sizeof(UInt32)) {
-        let val:UInt32 = (UInt32(slice[idx.advancedBy(3)]) << 24) | (UInt32(slice[idx.advancedBy(2)]) << 16) | (UInt32(slice[idx.advancedBy(1)]) << 8) | UInt32(slice[idx])
+        let a = UInt32(slice[idx.advancedBy(3)]) << 24
+        let b = UInt32(slice[idx.advancedBy(2)]) << 16
+        let c = UInt32(slice[idx.advancedBy(1)]) << 8
+        let d = UInt32(slice[idx])
+        let val:UInt32 = a | b | c | d
         result.append(val)
     }
     return result
